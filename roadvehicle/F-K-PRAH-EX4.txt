@@ -1,0 +1,1226 @@
+###Bus.java
+
+package roadvehicle;
+import java.awt.*;
+/**
+ * Bus.java Bus Class represents the colour and number of Seats in a Bus
+ */
+public class Bus extends RoadVehicle {
+
+    private int seats = 0; // initial value assigned to seats
+    private String vehicleCharacter;
+   
+
+    /**
+     *
+     * @param colour the colour of the Bus
+     * @param seats the number of seats in the Bus
+     */
+    public Bus(String colour, int seats) {
+        super(colour);           // explicit call to super Class Road Vehicle
+        this.seats = seats;
+        this.vehicleCharacter = "B";
+        
+
+    }
+
+    /**
+     * Sets the number of Seats for the Bus
+     *
+     * @param seats the seats of the Bus
+     */
+    public void setSeats(int seats) {
+        this.seats = seats;
+    }
+
+    /**
+     * Returns the seats
+     *
+     * @return seats of the Bus
+     */
+    public int getSeats() {
+        return seats;
+    }
+
+    @Override
+    public String getVehicleCharacter() {
+        return this.vehicleCharacter;
+
+    }
+
+
+
+    @Override
+    public String toString() {
+
+        return getColour() + " " + "bus" + " " + "with" + " " + getSeats() + " " + "seats";
+
+    }
+
+    /**
+     * Test Program for the Bus Class
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+         // initial Values assigned to Constructor
+
+        Bus bus1 = new Bus("Blue", 30);
+        Bus bus2 = new Bus("White", 45);
+
+        System.out.println(bus1.toString());
+        System.out.println(bus2.toString());
+
+    }
+}
+
+//***********************************************************************SAMPLE OUTPUT************************************************
+//run:
+//Blue bus with 30 seats
+//White bus with 45 seats
+###Car.java
+
+package roadvehicle;
+import java.awt.*;
+/*
+ * Car.java    Francis  Kingsworth Prah      COMP70110 Java   Ex4
+ * 
+ * Represents different Aspects of cars such as colour, make and current fuel levels
+ * Also shows assignment of two different variables using the equal sign during object creation
+ */
+/**
+ *
+ * A class to represent a car of a specific make,colour and fuel.
+ */
+public class Car extends RoadVehicle {
+
+    /**
+     * Instance Variables
+     */
+    private String make;      // the make of the car
+    private String vehicleCharacter;
+   
+
+    /**
+     *
+     * @param make the make of the car
+     * @param colour the colour of the car
+     */
+    public Car(String make, String colour) {
+        super(colour);
+        this.make = make;
+        this.vehicleCharacter = "C";
+  
+
+    }
+
+    /**
+     * Returns the make of a car Object
+     *
+     * @return the make
+     */
+    public String getMake() {
+        return make;
+    }
+
+    @Override
+    public String getVehicleCharacter() {
+        return this.vehicleCharacter;
+    }
+
+  
+
+    /**
+     * Returns a string representation of the car
+     *
+     * @return the colour, make and the fuel
+     */
+    @Override
+    public String toString() {
+        return this.getColour() + " " + this.getMake();
+    }//***************************************************************************************************************************************************
+
+    /**
+     * Test the Car Class
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        // initial Values assigned to Constructor
+
+        Car car1 = new Car("Ferrari", "Red");     //car1 first object
+        Car car2 = new Car("Volvo", "Blue");      //car2 second object
+
+        Car car3 = car2; //create a new car object called car3 of type car equal to car2
+
+        //----------------------------------------------------------------------------------------------------------------------------------------------------
+        System.out.printf("The make,Colour of the Original Car is %s%n", car1.toString());
+
+        car1.setColour("Yellow"); //assign new colour to car1
+
+        System.out.printf("The make, New Colour of the Original Car is %s%n", car1.toString());
+
+        System.out.printf("The current fuel level in the First Car is %s%n", car1.getFuel());
+
+        car2.addFuel(20);// add 20 units of fuel to car2
+
+        car2.setColour("Green"); //set colour of car2 to green
+
+        car3.useFuel(10); //use 10 units of fuel in car3
+
+        System.out.printf("The current fuel level in the second Car is %s%n", car2.getFuel());
+
+        System.out.printf("The current fuel level in the third Car is %s%n", car3.getFuel());
+
+        System.out.printf("The make, colour of the second car(car2)  is %s%n", car2.toString());
+
+        System.out.printf("The make, colour of the third  car(car3)  is %s%n", car3.toString());
+    }
+
+}
+###EmergencyVehicle.java
+package roadvehicle;
+import java.awt.*;
+/**
+ * EmergencyVehicle.java An Abstract Class which represents different types of
+ * Emergency Vehicle
+ */
+public abstract class EmergencyVehicle extends RoadVehicle {
+
+    private boolean codeBlue = false;
+
+    private String vehicleCharacter;
+  
+
+    /**
+     *
+     * @param colour the colour of the Emergency Vehicle
+     * @param codeBlue the codeBle of the Emergency Vehicle
+     */
+    public EmergencyVehicle(String colour, boolean codeBlue) {
+        super(colour);                // explicit call to super Class Road Vehicle Constructor
+        this.codeBlue = codeBlue;
+        this.vehicleCharacter = "F";
+      
+
+    }
+
+    /**
+     * Sets the Colour Code of the Emergency vehicle
+     *
+     * @param codeBlue the codeBle of the Emergency Vehicle
+     */
+    public void setCode(boolean codeBlue) {
+
+        this.codeBlue = codeBlue;
+    }
+
+    /**
+     * Returns the Colour Code of the Emergency vehicle
+     *
+     * @return the codeBle of the Emergency Vehicle
+     */
+    public boolean getCode() {
+        return codeBlue;
+    }
+
+    @Override
+    public String getVehicleCharacter() {
+        return this.vehicleCharacter;
+    }
+
+
+
+    @Override  // Overrides toString Abstract Method in Roadvehicle Class
+    public String toString() {
+        return "Emergency Vehicle ?" + " " + getColour() + " " + getCode();
+    }
+
+}
+###FireEngine.java
+package roadvehicle;
+import java.awt.*;
+/**
+ * FireEngine.java A Concrete Class of Emergency Vehicle Represents the colour
+ * of a Fire Engine and Whether its code is Red or Not
+ */
+public class FireEngine extends EmergencyVehicle {
+
+    private String vehicleCharacter;
+   
+
+    /**
+     *
+     * @param colour the colour of the Fire Engine
+     * @param codeBlue the codeBle of the Fire Engine
+     */
+    public FireEngine(String colour, boolean codeBlue) {
+        super(colour, codeBlue);  // explicit call to super Class Emergency Vehicle Constructor
+        this.vehicleCharacter = "F";
+    
+
+    }
+
+    /**
+     * Second Constructor which takes no arguments
+     */
+    public FireEngine() {
+
+        this("Red", true);  // defines the second constructor in terms of the first constructor
+    }
+
+    @Override
+    public String getVehicleCharacter() {
+        return this.vehicleCharacter;
+    }
+
+
+    @Override
+    public String toString() {
+        if (this.getCode() == true) {
+            return "Fire engine: CODEBLUE!";
+        } else {
+            return "Green fire engine";
+        }
+    }
+
+    /**
+     * test program
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        // initial Values assigned to Constructor
+
+        FireEngine fireEngine1 = new FireEngine("Red", true);
+        FireEngine fireEngine2 = new FireEngine("Green", false);
+
+        System.out.println(fireEngine1.toString());
+        System.out.println(fireEngine2.toString());
+
+    }
+
+}
+//**************************************************************************SAMPLE OUTPUT*****************************************************
+//run:
+//Fire engine: CODEBLUE!
+//Green fire engine
+###GoodsVehicle.java
+
+package roadvehicle;
+import java.awt.*;
+/**
+ * GoodsVehicle.java A concrete class which extends RoadVehicle Class Represents
+ * the type of goods vehicle and the maximum weight in kilos
+ */
+public class GoodsVehicle extends RoadVehicle {
+
+    private String type; //the type of Goods Vehicle
+    private int weight;  // the weight of the Goods Vehicle
+    private String vehicleCharacter;
+   
+
+    /**
+     *
+     * @param colour the colour of the Goods Vehicle
+     * @param type the type of the Goods Vehicle
+     * @param weight the weight of the Goods vehicle
+     */
+    public GoodsVehicle(String colour, String type, int weight) {
+        super(colour);         // explicit call to super Class Road Vehicle Constructor
+        this.type = type;
+        this.weight = weight;
+        this.vehicleCharacter = "G";
+      
+    }
+
+  
+
+    /**
+     * Returns the weight of the Goods Vehicle
+     *
+     * @return weight of the Goods Vehicle
+     */
+    public int getWeight() {
+        return weight;
+    }
+
+  
+
+    /**
+     * Returns the type of the Goods Vehicle
+     *
+     * @return type of the Goods Vehicle
+     */
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public String getVehicleCharacter() {
+        return this.vehicleCharacter;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return getColour() + " " + getType() + " " + "max weight" + " " + "=" + " " + getWeight();
+    }
+
+    /**
+     * Test Program for Goods Vehicle
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+         // initial Values assigned to Constructor
+
+        GoodsVehicle goodsVehicle1 = new GoodsVehicle("Green", "Van", 4200);
+        GoodsVehicle goodsVehicle2 = new GoodsVehicle("Black", "tanker", 3200);
+
+        System.out.println(goodsVehicle1.toString());
+        System.out.println(goodsVehicle2.toString());
+
+    }
+}
+
+//*************************************************************************SAMPLE OUTPUT*********************************************
+//run:
+//Green Van max weight = 4200
+//Black tanker max weight = 3200
+###QueueFullException.java
+
+package roadvehicle;
+
+/**
+ * QueueFullException.java
+ * Represents a Subclass of Exception which takes an integer in its Constructor and 
+ * String as well passing the String to its Super Classes constructor to display the message
+ */
+public class QueueFullException extends Exception {
+/**
+     * Instance Variables
+     */
+    private String message; // the message to be displayed
+    private int queueSize;  // the size of the Queue
+    
+    /**
+     *
+     * @param queueSize the Size of the Queue
+     * @param message   the message to be displayed
+     */
+    public QueueFullException(int queueSize, String message) {
+        this.queueSize = queueSize;
+        this.message = message;
+
+    }
+    
+    /**
+     * Returns the Message and QueueSize
+     * @return the message and queueSize
+     */
+    @Override
+    public String getMessage(){
+  
+        return(this.message + " " + this.queueSize);
+    
+    }
+    
+    /* A test of the QueueFull Exception  program
+    *
+    */
+    public static void main(String[] args) {
+    
+    QueueFullException qfe = new QueueFullException(20,"Queue Full: max capacity");
+    
+    System.out.println("Testing QueueFull Exception");
+    
+    System.out.println(qfe.getMessage());
+    
+    
+    }
+  
+}
+
+//******************************************************************Sample Output***********************************************************
+/*run:
+Testing QueueFull Exception
+Queue Full: max capacity 20*/
+###RoadVehicle.java
+
+package roadvehicle;
+import java.awt.*;
+/* RoadVehicle.java    Francis  Kingsworth Prah      COMP70110 Java   Ex4
+ * 
+ * Represents different Aspects of cars such as colour, make and current fuel levels
+ * 
+ */
+/**
+ *
+ * An Abstract class to represent a car of a specific make,colour and fuel.
+ */
+public abstract class RoadVehicle {
+
+    /**
+     * Instance Variables
+     */
+    private String colour;    //the colour of the car
+    private int fuel;         //the fuel in the car
+
+    /**
+     *
+     *
+     * @param colour the colour of the car
+     *
+     */
+    public RoadVehicle(String colour) {
+        this.colour = colour;
+
+        this.fuel = 0;
+    }
+
+    /**
+     * Sets a new colour to the car
+     *
+     * @param newColour the new colour of the car
+     */
+    public void setColour(String newColour) {
+
+        this.colour = newColour;
+    }
+
+    /**
+     * Returns the colour of a car object
+     *
+     * @return the colour
+     */
+    public String getColour() {
+        return colour;
+    }
+
+    /**
+     * Gets the fuel in a car
+     *
+     * @return the fuel
+     */
+    public int getFuel() {
+
+        return fuel;
+    }
+
+    /**
+     * Adds the amount of fuel Used to the current fuel level
+     *
+     * @param amount the amount
+     */
+    public void addFuel(int amount) {
+        fuel = fuel + amount;
+    }
+
+    /**
+     * Subtracts the amount of fuel from the current fuel level
+     *
+     * @param amount the amount
+     */
+    public void useFuel(int amount) {
+        fuel = fuel - amount;
+    }
+    
+public abstract String getVehicleCharacter();
+
+
+    /**
+     * Allows extending concrete classes to Override toString
+     *
+     * @return the colour, make 
+     */
+    @Override
+    public abstract String toString();
+    //***************************************************************************************************************************************************
+
+}
+###TrafficQueue.java
+
+package roadvehicle;
+
+import java.util.*;
+import java.awt.Graphics;
+import simplesim.*;
+import java.awt.Color;
+
+
+/*
+ * TrafficQueue.java       Francis Kingsworth Prah    COMP70110 Java   Ex3 Part 1
+ * Represents a Queue implementation in a class called TrafficQueue
+ * The Class also contains a sequence of car objects implemented using an Array
+ */
+
+//
+//public class TrafficQueue {
+//    /**
+//     * Instance Variables
+//     */
+//    private RoadVehicle[] cars;       //An array of cars
+//    private int queueSize;    // the size of the queue
+//
+//    /**
+//     * Initialises an empty car queue
+//     * @param queueSize the size of the queue
+//     */
+//    public TrafficQueue(int queueSize) {
+//        cars = new RoadVehicle[queueSize];
+//
+//    }
+//
+//    /**
+//     * Adds a car to the back of the queue
+//     * @param car is an element of cars
+//     */
+//    
+//    public void add(RoadVehicle car) {
+//        if (this.isFull()) {
+//
+//            System.out.println("Queue full");
+//
+//            System.exit(1);
+//
+//        } else {
+//
+//            cars[queueSize] = car;
+//            queueSize++;
+//
+//        }
+//    }
+//    
+//    /**
+//     * Returns the car removed
+//     * @return car removed from the queue
+//     */
+//    public RoadVehicle remove() {
+//
+//        RoadVehicle carRemoved = null; //Returns null if Queue is empty
+//
+//        if (this.isEmpty()) {
+//
+//            System.out.println("removing from  empty queue");
+//
+//        } else {
+//            carRemoved = cars[0];
+//
+//            this.queueSize--;
+//
+//            for (int k = 0; k < this.queueSize; k++) {
+//
+//                this.cars[k] = this.cars[k + 1];
+//            }
+//        }
+//        return carRemoved;
+//
+//    }
+//
+//    /**
+//     * Returns number of cars in the queue
+//     * @return the size of the queue
+//     */
+//    public int getNumberOfVehiclesInQue() {
+//
+//        return queueSize;
+//    }
+//
+//    /**
+//     * Checks whether Queue is Empty
+//     * @return true if car queue is empty otherwise false
+//     */
+//    public boolean isEmpty() {
+//
+//        return queueSize == 0;
+//    }
+//
+//    /**
+//     * Checks whether the Queue is full
+//     * @return true if car queue is full otherwise false
+//     */
+//    public boolean isFull() {
+//
+//        return queueSize == cars.length; //Alternatively could be return getNumberOfVehiclesInQue()== cars.length
+//    }
+//
+//    /**
+//     * Returns a String representation of the Queue
+//     * @return a string of car queue representation
+//     */
+//    @Override
+//    public String toString() {
+//        String result = "";
+//
+//        for (int z = 0; z < queueSize; z++) {
+//            result = result + cars[z].toString() + "\n";
+//        }
+//
+//        return result;
+//    }
+//
+//    /**
+//     * Main Program
+//     * @param args the command line arguments
+//     */
+//    public static void main(String[] args) {
+//        // Initialisation of values in Constructor
+//
+//    TrafficQueue queue1 = new TrafficQueue(10);
+//    
+//       Car car1 = new Car("Ferrari", "Red");     //car1 first object
+//       Car car2 = new Car("Volvo", "Blue");      //car2 second object  
+//       
+//       Bus bus1 = new Bus("Blue",30);
+//       Bus bus2 = new Bus("White",45);
+//       
+//       GoodsVehicle goodsVehicle1 = new GoodsVehicle("Green","Van",4200);
+//       GoodsVehicle goodsVehicle2 = new GoodsVehicle("Black","tanker",3200);
+//       
+////       queue1.add(car1);
+////       queue1.add(car2);
+////       
+////       queue1.add(bus1);
+////       queue1.add(bus2);
+////       
+////       queue1.add(goodsVehicle1);
+////       queue1.add(goodsVehicle2);
+////       
+////       System.out.println(queue1);
+////       
+////       
+//     RoadVehicle[] someVehicles = {car1,car2,bus1,bus2, goodsVehicle1, goodsVehicle2};
+////      
+////      System.out.println((Arrays.toString(someVehicles)));
+//      
+//     Random r = new Random();
+//        
+//        
+//        
+//        System.out.println("Adding 10 Random Vehicles..." + "\n");
+//
+//        
+//        
+//        for (int p=0; p<=9;p++){
+//            queue1.add(someVehicles[r.nextInt(someVehicles.length)]);
+//        
+//        }
+//        System.out.println(queue1);
+//        
+//        
+//        
+//    }
+//
+//}
+//*********************************************************************SAMPLE OUTPUT*************************************************************
+//run:
+//Adding 10 Random Vehicles...
+//
+//Red Ferrari
+//Blue bus with 30 seats
+//Red Ferrari
+//Red Ferrari
+//Blue bus with 30 seats
+//White bus with 45 seats
+//Blue Volvo
+//Black tanker max weight = 3200
+//Green Van max weight = 4200
+//Black tanker max weight = 3200
+
+
+/*
+ * TrafficQueue.java       Francis Kingsworth Prah    COMP70110 Java   Ex4 
+ * Represents a Queue implementation in a class called TrafficQueue
+ * The Class also contains a sequence of car objects implemented using an Array
+ */
+//v
+/**
+ *
+ * 
+ * @author acer
+ */
+public class TrafficQueue implements ThingBeingSimulated {
+
+    /**
+     * Instance Variables
+     */
+    private ArrayList<RoadVehicle> vehicle;
+    //private RoadVehicle[] cars;        //An array of cars
+    private int queueSize = 0;     // the size of the queue
+    private int front = 0;     //index of first element of car queue
+    private int back = 0;      // index of last element of car queue
+    private int maxCapacity = 20;
+
+    private static final ArrayList<RoadVehicle> someVehicles = new ArrayList<>(Arrays.asList(new Car("Ferrari", "Red"), new Car("Volvo", "Blue"), new Bus("Blue", 30), new Bus("White", 45), new GoodsVehicle("Green", "Van", 4200), new GoodsVehicle("Black", "tanker", 3200), new FireEngine("Red", true), new FireEngine("Green", false)));
+    private Random rand1 = new Random();           // Generates Random Vehicles
+    private static String[] arr = new String[20];  // An array to hold vehicles
+
+    private String vehicleCharArr;                           // Array to hold a summary of vehicle characters
+    private ArrayList<String> list1 = new ArrayList<>();
+
+    private static Map<String, Color> myColorMap = new HashMap<>();  // Hashmap to convert String to color Objects
+   
+
+    private RoadVehicle vehicleAdded;  // Last vehicle added
+    private int maxX, maxY; // Boundary within which we'll display the summary
+
+    
+   
+    /**
+     * Initialises an empty car queue
+     *
+     * @param maxCapacity the maximum capacity of the vehicle ArrayList
+     */
+    public TrafficQueue(int maxCapacity) {
+        //cars = new RoadVehicle[queueSize];
+        vehicle = new ArrayList<RoadVehicle>(Collections.nCopies(this.getMaxCapacity(), (RoadVehicle) null)); //initialise vehicle arraylist with nulls 
+        list1 = new ArrayList<String>(Collections.nCopies(this.getMaxCapacity(), (String) null));  //initialise list1 to null
+    }
+//============================================================================================================================================================================================
+
+    /**
+     * Adds a car to the queue
+     *
+     * @param car the car to add
+     */
+//    public void add( RoadVehicle roadVehicle) {
+//        if (this.isFull()) {
+//            System.out.println("Queue Full" + "\n");
+//           
+//            //System.exit(1);
+//        } else {
+//            vehicle.set(queueSize, roadVehicle);
+//            back=back+1;
+//            if (back == vehicle.size()) {
+//                back = 0;
+//            }
+//            
+//            queueSize++;
+//        }
+//    }
+    //******************************* ******************************************************************************************
+//    public void add(RoadVehicle roadVehicle) {
+//
+//        EmergencyVehicle tcar = null;
+//        if ((roadVehicle instanceof EmergencyVehicle)) {
+//            tcar = (EmergencyVehicle) roadVehicle;
+//
+//            // System.out.println(tcar.getCode());
+//        }
+//        if (this.isFull()) {
+//
+//            System.out.println("Queue full");
+//
+//            //System.exit(1);
+//
+//        }
+//
+//        if ((roadVehicle instanceof EmergencyVehicle) && tcar.getCode() == true) {
+//            this.addToFront(roadVehicle);
+//        } else {
+//            this.addToBack(roadVehicle);
+//        }
+//
+//    }
+//
+//    private void addToBack(RoadVehicle roadVehicle) {
+//
+//        vehicle.set(back, roadVehicle);
+//        back = back + 1;
+//        queueSize++;
+//    }
+//
+//    /**
+//     *
+//     * @param car the element to be added
+//     */
+//    public void addToFront(RoadVehicle roadVehicle) {
+//
+//        if (front == 0) {
+//            vehicle.set(front = vehicle.size() - 1, roadVehicle);
+//        } else {
+//            vehicle.set((--front) % vehicle.size(), roadVehicle);
+//        }
+//
+//        queueSize++;
+//    }
+//============================================================================================================================================================================================= 
+    /**
+     * Removes a car from the queue
+     *
+     * @return the roadVehicle removed
+     */
+    public RoadVehicle remove() {
+
+        if (isEmpty()) {
+            throw new RuntimeException("removing from empty queue");
+        }
+        RoadVehicle roadVehicle = vehicle.get(front);
+        vehicle.set(front, null);
+        queueSize--;
+        front++;
+        if (front == vehicle.size()) {
+            front = 0;
+        }
+
+        return roadVehicle;
+
+    }
+
+    /**
+     *
+     * @param roadVehicle the roadVehicle to be added
+     * @throws QueueFullException the Custom Exception
+     */
+    public void add(RoadVehicle roadVehicle) throws QueueFullException {
+
+        if (this.isFull()) {
+
+            // System.out.println("Queue full");
+            //System.exit(1);
+            throw new QueueFullException(this.getMaxCapacity(), "Queue full: max capacity");
+        } else {
+
+            vehicle.set(back, roadVehicle);
+            back = back + 1;
+            if (back == vehicle.size()) {
+                back = 0;
+            }
+
+            queueSize++;
+
+        }
+
+    }
+
+    /**
+     * Returns the car removed
+     *
+     * @return car removed from the queue
+     */
+//    public RoadVehicle remove() {
+//
+//        RoadVehicle carRemoved = null; //Returns null if Queue is empty
+//        carRemoved = vehicle.set(0, vehicle.get(0));
+//
+//        if (this.isEmpty()) {
+//
+//            System.out.println("removing from  empty queue");
+//
+//        } else {
+//            vehicle.set(front, vehicle.get(front));
+//
+//            this.queueSize--;
+//            front++;
+//            if (front == vehicle.size()) {
+//                front = 0;
+//            }
+//            for (int k = 0; k < this.queueSize; k++) {
+//
+//                this.vehicle.set(k, this.vehicle.get(k + 1));
+//            }
+//        }
+//        return carRemoved;
+//
+//    }
+//    public RoadVehicle
+    /**
+     * Returns the number of cars in the queue
+     *
+     * @return the queueSize of the queue
+     */
+    public int getNumberOfVehiclesInQue() {
+
+        return vehicle.size(); // (back + array.length - front) % array.length
+    }
+
+    /**
+     * finds whether the car queue is empty
+     *
+     * @return true if empty otherwise false
+     */
+    public boolean isEmpty() {
+
+        return queueSize == 0; //return front == back;
+    }
+
+    /**
+     * finds whether the Car queue is full
+     *
+     * @return true if queue is full otherwise false
+     */
+    public boolean isFull() {
+
+        return queueSize == this.maxCapacity; //Alternatively could be return getNumberOfVehiclesInQue()== vehicle.Size()
+    }
+
+    //==================================================================================================================================================
+    /**
+     *
+     * @return the maxCapacity of the Vehicle ArrayList
+     */
+    public int getMaxCapacity() {
+        this.maxCapacity = 20;
+        return maxCapacity;
+    }
+    
+    /**
+     *
+     * Display the current Summary of the Queue on the Screen
+     * @param g the Graphics object
+     */
+    @Override
+    public void display(Graphics g) {
+
+        maxX = 10;
+        maxY = 10;
+
+        g.drawString("Last item added to Queue is" + " " + vehicleAdded, maxX, maxY + 10);
+
+        g.drawString("Summary of Queue is" + " " + "\n" + vehicleCharArr, maxX, maxY + 20);
+
+        for (int i = 0; i < vehicle.size(); i++) {
+            for (Map.Entry<String, Color> entry : myColorMap.entrySet()) {
+                if (entry.getKey().equals(list1.get(i))) {
+                    g.setColor(myColorMap.get(list1.get(i)));
+                }
+            }
+
+        }
+
+
+    }
+    
+     /**
+     *
+     * Set the bounds within which the Summary of the Queue will be displayed
+     * @param maxX the maxX Boundary
+     * @param maxY the maxY Boundary
+     */
+    @Override
+    public void setBounds(int maxX, int maxY) {
+        this.maxX = maxX;
+        this.maxY = maxY;
+    }
+
+    /**
+     *
+     * Resets the Simulation to its original state
+     * @return new TrafficQueue of its original size
+     */
+    @Override
+    public ThingBeingSimulated reset() {
+
+        return new TrafficQueue(maxCapacity);
+    }
+
+    /**
+     *
+     * Performs the Simulation
+     * @throws simplesim.SimulationException the SimulationException
+     */
+    
+    @Override
+    public void simstep() throws SimulationException {
+        System.out.println("Adding some Random Vehicles..." + "\n");
+
+        //Fill the  Queue
+        try {
+            for (int p = 0; p < 20; p++) {
+                this.add(someVehicles.get(rand1.nextInt(someVehicles.size())));
+            }
+        } catch (QueueFullException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        //Basic SimStep Operations       
+        if (this.isFull()) {
+
+            System.out.println("Removing vehicle...." + "  " + this.remove());
+
+            System.out.println("Adding with a Random Vehicle...");
+            vehicleAdded = (someVehicles.get(rand1.nextInt(someVehicles.size())));
+            try {
+                this.add(vehicleAdded);
+            } catch (QueueFullException ex1) {
+                throw new SimulationException(ex1.getMessage());  // throw new SimulationException, Convert QueueFullException to SimulationException
+            }
+
+
+            System.out.println("Summary of Queue" + vehicle.toString());
+            System.out.println("Get Last item added in Queue " + vehicleAdded); 
+            
+            // Get Vehicle Characters using Dynamic Binding
+            for (int f = 0; f < vehicle.size(); f++) {
+                RoadVehicle r = vehicle.get(f);
+                arr[f] = r.getVehicleCharacter();
+                list1.set(f, r.getVehicleCharacter());
+
+            }
+            //Convert vehicle Array to print
+            vehicleCharArr = (Arrays.toString(arr).replace("[", "").replace("]", "").replace(",", "").replace(" ", "").trim());
+
+//            System.out.println(Arrays.toString(arr));
+//            System.out.println(list1);
+            System.out.println("Queue Summary Character" + " " + vehicleCharArr);
+
+        }
+
+// Assign Values to ColorMap
+        myColorMap.put("B", Color.RED);
+        myColorMap.put("C", Color.BLUE);
+        myColorMap.put("G", Color.GREEN);
+        myColorMap.put("F", Color.MAGENTA);
+
+    }
+
+//    }
+    /**
+     * Returns a String representation of the queue
+     *
+     * @return the result from the queue.
+     */
+    @Override
+    public String toString() {
+        String result = String.format("Traffic Queue Simulation " + "\n", this.vehicle.size());
+        if (queueSize == 0) {
+            return result;
+        }
+        if (front >= back) {
+            for (int y = front; y < vehicle.size(); y++) {
+                result = result + vehicle.get(y).toString() + "\n";
+            }
+            for (int y = 0; y < back; y++) {
+                result = result + vehicle.get(y).toString() + "\n";
+            }
+        } else {
+            for (int y = front; y < back; y++) {
+                result = result + vehicle.get(y).toString() + "\n";
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Main Program
+     * Test the Simulation
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+
+        //initial Values assigned to Constructor
+//        Car car1 = new Car("Ferrari", "Red");     //car1 first object
+//        Car car2 = new Car("Volvo", "Blue");      //car2 second object  
+//
+//        Bus bus1 = new Bus("Blue", 30);
+//        Bus bus2 = new Bus("White", 45);
+//
+//        GoodsVehicle goodsVehicle1 = new GoodsVehicle("Green", "Van", 4200);
+//        GoodsVehicle goodsVehicle2 = new GoodsVehicle("Black", "tanker", 3200);
+//
+//        FireEngine fireEngine1 = new FireEngine("Red", true);
+//        FireEngine fireEngine2 = new FireEngine("Green", false);
+//
+        TrafficQueue queue1 = new TrafficQueue(20);   // Create new queue queue1
+        TrafficQueue queue2 = new TrafficQueue(20);   // Create new queue queue2
+
+//        queue1.add(car1);
+//        queue1.add(car2);
+//
+//        queue1.add(bus1);
+//        queue1.add(bus2);
+//
+//
+//        
+//        queue1.add(goodsVehicle1);
+//        queue1.add(goodsVehicle2);
+//        
+//        queue1.add(fireEngine1);
+//        queue1.add(fireEngine2);
+//        
+//        System.out.println("Printing Queue...");
+//        System.out.println(queue1.toString());
+//        RoadVehicle[] someVehicles = {car1, car2, bus1, bus2, goodsVehicle1, goodsVehicle2, fireEngine1, fireEngine2};
+        //System.out.println("Printing Contents of the Arrray..");
+        // System.out.println((Arrays.toString(someVehicles))); 
+//        ArrayList<RoadVehicle> someVehicles = new ArrayList<>(Arrays.asList(car1, car2, bus1, bus2, goodsVehicle1, goodsVehicle2, fireEngine1, fireEngine2));
+        Random r = new Random();  
+
+//        System.out.println("Adding some Random Vehicles..." + "\n");
+//
+//        for (int k = 0; k<= 20; k++)
+//            try {
+//                queue1.add(someVehicles.get(r.nextInt(someVehicles.size())));
+//            } catch (QueueFullException ex) {
+//                System.out.println(ex.getMessage());
+//            }
+        SimulationFrame f = new SimulationFrame(500, 400, queue1);
+        f.setVisible(true);
+
+        System.out.println("***************************************************************************************************");
+        System.out.println("Tries Summary for QueueFUllException and RuntimeException for add and Remove methods respectively");
+        System.out.println("****************************************************************************************************");
+        
+        //*****************************************************Try for RuntimeException********************************************************
+        try {
+            queue2.remove();
+        } catch (RuntimeException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        
+        //******************************************************Try for QueueFullException*******************************************************************************
+        try {
+            for (int p = 0; p <= 20; p++) {
+                queue2.add(someVehicles.get(r.nextInt(someVehicles.size())));
+
+            }
+        } catch (QueueFullException ex) {
+
+            System.out.println(ex.getMessage());
+            
+            
+        } finally {
+            System.out.println("Execution complete");  //Finally do this regardless
+        }
+
+    }
+}
+
+
+
+//*************************************************************Sample Output from Console*********************************************
+/*run:
+Look and feel set to com.sun.java.swing.plaf.windows.WindowsLookAndFeel
+***************************************************************************************************
+Tries Summary for QueueFUllException and RuntimeException for add and Remove methods respectively
+****************************************************************************************************
+removing from empty queue
+Queue full: max capacity20
+Execution complete
+Adding some Random Vehicles...
+
+Removing vehicle....  Red Ferrari
+Adding with a Random Vehicle...
+Summary of Queue[Green fire engine, Blue bus with 30 seats, Black tanker max weight = 3200, Blue bus with 30 seats, Blue bus with 30 seats, Fire engine: CODEBLUE!, White bus with 45 seats, Fire engine: CODEBLUE!, Green Van max weight = 4200, White bus with 45 seats, Green fire engine, Green Van max weight = 4200, Fire engine: CODEBLUE!, Green Van max weight = 4200, Green Van max weight = 4200, Black tanker max weight = 3200, White bus with 45 seats, Green fire engine, Blue bus with 30 seats, Black tanker max weight = 3200]
+Get Last item added in Queue Green fire engine
+Queue Summary Character FBGBBFBFGBFGFGGGBFBG
+Adding some Random Vehicles...
+
+Queue full: max capacity20
+Removing vehicle....  Blue bus with 30 seats
+Adding with a Random Vehicle...
+Summary of Queue[Green fire engine, Red Ferrari, Black tanker max weight = 3200, Blue bus with 30 seats, Blue bus with 30 seats, Fire engine: CODEBLUE!, White bus with 45 seats, Fire engine: CODEBLUE!, Green Van max weight = 4200, White bus with 45 seats, Green fire engine, Green Van max weight = 4200, Fire engine: CODEBLUE!, Green Van max weight = 4200, Green Van max weight = 4200, Black tanker max weight = 3200, White bus with 45 seats, Green fire engine, Blue bus with 30 seats, Black tanker max weight = 3200]
+Get Last item added in Queue Red Ferrari
+Queue Summary Character FCGBBFBFGBFGFGGGBFBG
+Adding some Random Vehicles...
+
+Queue full: max capacity20
+Removing vehicle....  Black tanker max weight = 3200
+Adding with a Random Vehicle...
+Summary of Queue[Green fire engine, Red Ferrari, Blue Volvo, Blue bus with 30 seats, Blue bus with 30 seats, Fire engine: CODEBLUE!, White bus with 45 seats, Fire engine: CODEBLUE!, Green Van max weight = 4200, White bus with 45 seats, Green fire engine, Green Van max weight = 4200, Fire engine: CODEBLUE!, Green Van max weight = 4200, Green Van max weight = 4200, Black tanker max weight = 3200, White bus with 45 seats, Green fire engine, Blue bus with 30 seats, Black tanker max weight = 3200]
+Get Last item added in Queue Blue Volvo
+Queue Summary Character FCCBBFBFGBFGFGGGBFBG
+Adding some Random Vehicles...*/
